@@ -12,6 +12,7 @@
 		48C36D8B2B6108F000344145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48C36D8A2B6108F000344145 /* Assets.xcassets */; };
 		48C36D8E2B6108F000344145 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48C36D8D2B6108F000344145 /* Preview Assets.xcassets */; };
 		48C36D952B610CE900344145 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C36D942B610CE900344145 /* DetailView.swift */; };
+		48C36D972B61124000344145 /* WinterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C36D962B61124000344145 /* WinterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		48C36D8A2B6108F000344145 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48C36D8D2B6108F000344145 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		48C36D942B610CE900344145 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		48C36D962B61124000344145 /* WinterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				48C36D862B6108EF00344145 /* ToDoListApp.swift */,
 				48C36D882B6108EF00344145 /* ToDoListView.swift */,
 				48C36D942B610CE900344145 /* DetailView.swift */,
+				48C36D962B61124000344145 /* WinterView.swift */,
 				48C36D8A2B6108F000344145 /* Assets.xcassets */,
 				48C36D8C2B6108F000344145 /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 				48C36D892B6108EF00344145 /* ToDoListView.swift in Sources */,
 				48C36D952B610CE900344145 /* DetailView.swift in Sources */,
 				48C36D872B6108EF00344145 /* ToDoListApp.swift in Sources */,
+				48C36D972B61124000344145 /* WinterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,23 +8,60 @@
 import SwiftUI
 
 struct ToDoListView: View {
+    @State private var sheetIsPresented = false
+    
+    var toDos = ["Learn Swift",
+                 "Build Apps",
+                 "Change The World",
+                 "Bring The Awesome",
+                 "Take a Vacation"]
+    
     var body: some View {
         NavigationStack {
-            VStack {            NavigationLink {
-                DetailView()
-            } label: {
-                Image(systemName: "eye")
-                Text("Show the new View!")
+            List {
+                ForEach(toDos, id: \.self) { toDo in
+                    NavigationLink {
+                        DetailView(passedValue: toDo)
+                    } label: {
+                        Text(toDo)
+                    }
+                    .font(.title2)
+                    
+                }
+                
             }
-            .buttonStyle(.borderedProminent)
+            .navigationTitle("To Do List")
+            .navigationBarTitleDisplayMode(.automatic)
+            .listStyle(.plain)
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    Button {
+                        sheetIsPresented.toggle()
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
             }
-            .padding()
+        }
+        .sheet(isPresented: $sheetIsPresented) {
+            DetailView(passedValue: "")
         }
     }
 }
+
 
 #Preview {
     ToDoListView()
 }
 
 
+//ForEach(0..<100, id: \.self) { number in
+//    NavigationLink {
+//        DetailView(passedValue: "Item \(number)")
+//    } label: {
+//        Text("Item \(number) ")
+//    }
+//}
