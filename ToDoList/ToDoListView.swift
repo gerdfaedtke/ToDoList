@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ToDoListView.swift
 //  ToDoList
 //
 //  Created by Gerd Faedtke on 24.01.24.
@@ -9,16 +9,22 @@ import SwiftUI
 
 struct ToDoListView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {            NavigationLink {
+                DetailView()
+            } label: {
+                Image(systemName: "eye")
+                Text("Show the new View!")
+            }
+            .buttonStyle(.borderedProminent)
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
 #Preview {
     ToDoListView()
 }
+
+
