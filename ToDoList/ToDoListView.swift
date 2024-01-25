@@ -23,10 +23,10 @@ struct ToDoListView: View {
                     .font(.title2)
                 }
                 .onDelete { indexSet in
-                    toDosVM.delete(indexSet: indexSet)
+                    toDosVM.deleteToDo(indexSet: indexSet)
                 }
                 .onMove { fromOffsets, toOffset in
-                    toDosVM.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                    toDosVM.moveToDo(fromOffsets: fromOffsets, toOffset: toOffset)
                 }
             }
             .navigationTitle("To Do List")
@@ -50,11 +50,10 @@ struct ToDoListView: View {
             }
             .sheet(isPresented: $sheetIsPresented) {
                 NavigationStack {
-                    DetailView(toDo: ToDo(), newToDo: true) // new value
+                    DetailView(toDo: ToDo())
                     
                 }
             }
-            
         }
     }
 }
