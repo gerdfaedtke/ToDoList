@@ -21,13 +21,19 @@ class ToDosViewModel: ObservableObject {
     func saveToDo(toDo: ToDo, newToDo: Bool) {
         // if new, append toDoVM.toDos else updaate the toDo that was passed in from the List
         if newToDo {
-           toDos.append(toDo)
-           
+            toDos.append(toDo)
+            
         } else {
             if let index = toDos.firstIndex(where: {$0.id == toDo.id}) {
                 toDos[index] = toDo
                 
             }
         }
+    }
+    func delete(indexSet: IndexSet) {
+        toDos.remove(atOffsets: indexSet)
+    }
+    func move(fromOffsets: IndexSet,toOffset: Int) {
+       toDos.move(fromOffsets: fromOffsets, toOffset: toOffset)
     }
 }

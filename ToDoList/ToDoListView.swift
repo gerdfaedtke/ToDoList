@@ -21,15 +21,22 @@ struct ToDoListView: View {
                         Text(toDo.item)
                     }
                     .font(.title2)
-                    
                 }
-                
+                .onDelete { indexSet in
+                    toDosVM.delete(indexSet: indexSet)
+                }
+                .onMove { fromOffsets, toOffset in
+                    toDosVM.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                }
             }
             .navigationTitle("To Do List")
             .navigationBarTitleDisplayMode(.automatic)
             .listStyle(.plain)
             
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     Button {
@@ -39,6 +46,7 @@ struct ToDoListView: View {
                         Image(systemName: "plus")
                     }
                 }
+                
             }
             .sheet(isPresented: $sheetIsPresented) {
                 NavigationStack {
