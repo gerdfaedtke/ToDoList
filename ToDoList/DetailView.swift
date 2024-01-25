@@ -9,64 +9,60 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) private var dismiss
-    
-    @State private var toDo = ""
-    @State private var reminderIsOn = false
-    @State private var dueDate = Date.now + (60*60*24) // sec. in a day
-    @State private var notes = ""
-    @State private var isCompleted = false
-    
-    var passedValue: String
+    @EnvironmentObject var toDosVM: ToDosViewModel
+    @State var toDo: ToDo
+    var newToDo = false 
     
     var body: some View {
-        NavigationStack {
-            List {
-                TextField("Enter To Do here", text: $toDo)
-                    .font(.title)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.vertical)
-                    .listRowSeparator(.hidden)
-                
-                Toggle("Set Reminder:", isOn: $reminderIsOn)
-                    .padding(.top)
-                    .listRowSeparator(.hidden)
-                
-                DatePicker("Date", selection: $dueDate)
-                    .listRowSeparator(.hidden)
-                    .padding(.bottom)
-                    .disabled(!reminderIsOn)
-                
-                Text("Notes")
-                    .padding(.top)
-                TextField("Notes", text: $notes, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
-                    .listRowSeparator(.hidden)
-                Toggle("Completed:", isOn: $isCompleted)
-                    .padding(.top)
-                    .listRowSeparator(.hidden)
-                
-                
-            }
-            .listStyle(.plain)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        // TODI: Add Save code here
-                    }
-                }
-            }
-            .navigationBarBackButtonHidden()
-            .navigationBarTitleDisplayMode(.inline)
+        List {
+            TextField("Enter To Do here", text: $toDo.item)
+                .font(.title)
+                .textFieldStyle(.roundedBorder)
+                .padding(.vertical)
+                .listRowSeparator(.hidden)
+            
+            Toggle("Set Reminder:", isOn: $toDo.reminderIsOn)
+                .padding(.top)
+                .listRowSeparator(.hidden)
+            
+            DatePicker("Date", selection: $toDo.dueDate)
+                .listRowSeparator(.hidden)
+                .padding(.bottom)
+                .disabled(!toDo.reminderIsOn)
+            
+            Text("Notes")
+                .padding(.top)
+            TextField("Notes", text: $toDo.notes, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .listRowSeparator(.hidden)
+            Toggle("Completed:", isOn: $toDo.isCompleted)
+                .padding(.top)
+                .listRowSeparator(.hidden)
+            
         }
-        
+        .listStyle(.plain)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    toDosVM.saveToDo(toDo: toDo, newToDo: newToDo)
+                    dismiss()
+                }
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    DetailView(passedValue: "Item 1")
+    NavigationStack {
+        DetailView(toDo: ToDo())
+            .environmentObject(ToDosViewModel())
+    }
+    
 }
