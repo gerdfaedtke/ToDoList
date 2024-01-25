@@ -11,11 +11,7 @@ class ToDosViewModel: ObservableObject {
     @Published var toDos: [ToDo] = []
     
     init() {
-        // Temp Data here. Will eventually load in saved data
-        toDos.append(ToDo(id: UUID().uuidString, item: "Learn Swift"))
-        toDos.append(ToDo(id: UUID().uuidString, item: "Build Apps"))
-        toDos.append(ToDo(id: UUID().uuidString, item: "Change the World"))
-        toDos.append(ToDo(id: UUID().uuidString, item: "Go on Vacation"))
+        loadData()
     }
     
     func saveToDo(toDo: ToDo) {
@@ -31,11 +27,33 @@ class ToDosViewModel: ObservableObject {
                 
             }
         }
+        saveData()
     }
     func deleteToDo(indexSet: IndexSet) {
         toDos.remove(atOffsets: indexSet)
+        saveData()
     }
     func moveToDo(fromOffsets: IndexSet,toOffset: Int) {
        toDos.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        saveData()
     }
+    func saveData() {
+        let path = URL.documentsDirectory.appending(component: "toDos")
+        let data = try? JSONEncoder().encode(toDos) // try? means if error is thrown, data = nil
+        do {
+            try data?.write(to: path)
+        } catch {
+            print("😡 Error: Could not save data \(error.localizedDescription)")
+        }
+    }
+    func loadData() {
+        let path = URL.documentsDirectory.appending(component: "toDos")
+        guard let data = try? Data(contentsOf: path) else {return}
+        do {
+            toDos = try JSONDecoder().decode(Array<ToDo>.self, from: data)
+        } catch {
+            print("😡 Error: Could not load data \(error.localizedDescription)")
+        }
+    }
+    
 }
